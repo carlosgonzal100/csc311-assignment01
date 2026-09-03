@@ -63,7 +63,6 @@ public abstract class Vehicle implements Honkable {
     //method checks and validates all values before storing them in the fields, throws IllegalArgumentException if any value is invalid
     protected Vehicle(String vin, String make, String model, int year, String color,
                       int wheels, double engineSize, FuelType fuelType, double fuelCapacity) {
-        try {
 
             //validating vin before storing it, if valid, store it in upper case
             if (vin == null || vin.trim().length() != 17) {
@@ -98,9 +97,6 @@ public abstract class Vehicle implements Honkable {
             setWheels(wheels);
             setFuelCapacity(fuelCapacity);
 
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
     }
 
     //private static helper method to validate make, model, and color
@@ -195,12 +191,17 @@ public abstract class Vehicle implements Honkable {
 
     @Override
     public void honk() {
-        throw new UnsupportedOperationException("TODO-04");
+        System.out.println(hornSound());
     }
 
     @Override
     public void honk(int times) {
-        throw new UnsupportedOperationException("TODO-04");
+        if (times < 1) {
+            throw new IllegalArgumentException("times must be at least 1: " + times);
+        }
+        for (int i = 0; i < times; i++) {
+            System.out.println(hornSound());
+        }
     }
 
     /** Subclasses answer these two. Do not write bodies here. */
