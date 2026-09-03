@@ -3,7 +3,10 @@ package edu.farmingdale.csc311.fleet;
 /**
  * The fuels a fleet vehicle can run on.
  *
- * @author YOUR NAME HERE
+ * Note: Git copilot was used to help the from label method, the part
+ * being the enhanced for loop and the if statement.
+ *
+ * @author Carlos Gonzalez
  */
 public enum FuelType {
 
@@ -22,26 +25,36 @@ public enum FuelType {
      * write the constructor, then finish the five methods below.
      * ------------------------------------------------------------------ */
 
-    GASOLINE,
-    DIESEL,
-    ELECTRIC,
-    HYBRID;
+    GASOLINE("Gasoline", "gallons", 28.0);
+    DIESEL("Diesel", "gallons", 34.0);
+    ELECTRIC("Electric", "kWh", 3.2);
+    HYBRID("Hybrid", "gallons", 48.0);
+
+    private final String label;
+    private final String unit;
+    private final double milesPerUnit;
+
+    FuelType(String label, String unit, double milesPerUnit) {
+        this.label = label;
+        this.unit = unit;
+        this.milesPerUnit = milesPerUnit;
+    }
 
     public String getLabel() {
-        throw new UnsupportedOperationException("TODO-01");
+        return label;
     }
 
     public String getUnit() {
-        throw new UnsupportedOperationException("TODO-01");
+        return unit;
     }
 
     public double getMilesPerUnit() {
-        throw new UnsupportedOperationException("TODO-01");
+        return milesPerUnit;
     }
 
     /** False for ELECTRIC, true for the rest. */
     public boolean hasEngine() {
-        throw new UnsupportedOperationException("TODO-01");
+        return this != ELECTRIC;
     }
 
     /**
@@ -49,6 +62,11 @@ public enum FuelType {
      * Throws IllegalArgumentException if the text matches nothing.
      */
     public static FuelType fromLabel(String text) {
-        throw new UnsupportedOperationException("TODO-01");
+        for (FuelType fuelType : FuelType.values()) {
+            if (fuelType.getLabel().equalsIgnoreCase(text.trim())) {
+                return fuelType;
+            }
+        }
+        throw new IllegalArgumentException("No FuelType found for label: " + text);
     }
 }
