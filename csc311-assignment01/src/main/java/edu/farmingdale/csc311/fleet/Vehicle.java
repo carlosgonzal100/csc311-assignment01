@@ -68,61 +68,35 @@ public abstract class Vehicle implements Honkable {
             //validating vin before storing it, if valid, store it in upper case
             if (vin == null || vin.trim().length() != 17) {
                 throw new IllegalArgumentException("vin must be exactly 17 characters: " + vin);
-            } else {
-                this.vin = vin.trim().toUpperCase();
             }
+            this.vin = vin.trim().toUpperCase();
 
-            //validate and store make using the helper method validateTrim
+            //validate and store make and model using the helper method validateTrim
             this.make = validateTrim("make", make);
-
-            //validate and store model using the helper method validateTrim
             this.model = validateTrim("model", model);
 
-            //validate and store color using the helper method validateTrim
-            this.color = validateTrim("color", color);
-
-            //validating year before storing it
-            if(year < 1900 || year > 2100) {
-                throw new IllegalArgumentException("year must be between 1900 and 2100: " + year);
-            } else {
-                this.year = year;
-            }
-
-            //validating wheels before storing it
-            if(wheels < 2 || wheels > 18) {
-                throw new IllegalArgumentException("wheels must be between 2 and 18: "+ wheels);
-            } else {
-                this.wheels = wheels;
-            }
-
-            //validating fuelType before storing it
-            if(fuelType == null) {
+            //fuelType and engineSize are final and must be validated/set here
+            if (fuelType == null) {
                 throw new IllegalArgumentException("fuelType cannot be null");
-            } else {
-                this.fuelType = fuelType;
             }
+            this.fuelType = fuelType;
 
-            //validating engineSize before storing it
-            if(fuelType.hasEngine()) {
-                if(engineSize <= 0.0 || engineSize > 8.5) {
+            if (fuelType.hasEngine()) {
+                if (engineSize <= 0.0 || engineSize > 8.5) {
                     throw new IllegalArgumentException("engineSize must be above 0.0 and at most 8.5 when fuelType has an engine: " + engineSize);
-                } else {
-                    this.engineSize = engineSize;
                 }
             } else {
-                if(engineSize != 0.0) {
+                if (engineSize != 0.0) {
                     throw new IllegalArgumentException("engineSize must be exactly 0.0 when fuelType does not have an engine: " + engineSize);
-                } else {
-                    this.engineSize = engineSize;
                 }
             }
+            this.engineSize = engineSize;
 
-            //validating fuelCapacity before storing it
-            if(fuelCapacity <= 0.0) {
-                throw new IllegalArgumentException("fuelCapacity must be above 0.0: " + fuelCapacity);
-            } else {
-                this.fuelCapacity = fuelCapacity;
-            }
+            //use setters for fields that have validation implemented there
+            setColor(color);
+            setYear(year);
+            setWheels(wheels);
+            setFuelCapacity(fuelCapacity);
 
         } catch (IllegalArgumentException e) {
             throw e;
@@ -146,55 +120,64 @@ public abstract class Vehicle implements Honkable {
      * ------------------------------------------------------------------ */
 
     public String getVin() {
-        throw new UnsupportedOperationException("TODO-03");
+        return vin;
     }
 
     public String getMake() {
-        throw new UnsupportedOperationException("TODO-03");
+        return make;
     }
 
     public String getModel() {
-        throw new UnsupportedOperationException("TODO-03");
+        return model;
     }
 
     public int getYear() {
-        throw new UnsupportedOperationException("TODO-03");
+        return year;
     }
 
     public void setYear(int year) {
-        throw new UnsupportedOperationException("TODO-03");
+        if (year < 1900 || year > 2100) {
+            throw new IllegalArgumentException("year must be between 1900 and 2100: " + year);
+        }
+        this.year = year;
     }
 
     public String getColor() {
-        throw new UnsupportedOperationException("TODO-03");
+        return color;
     }
 
     public void setColor(String color) {
-        throw new UnsupportedOperationException("TODO-03");
+        this.color = validateTrim("color", color);
     }
 
     public int getWheels() {
-        throw new UnsupportedOperationException("TODO-03");
+        return wheels;
     }
 
     public void setWheels(int wheels) {
-        throw new UnsupportedOperationException("TODO-03");
+        if (wheels < 2 || wheels > 18) {
+            throw new IllegalArgumentException("wheels must be between 2 and 18: " + wheels);
+        }
+        this.wheels = wheels;
     }
 
     public double getEngineSize() {
-        throw new UnsupportedOperationException("TODO-03");
+        return engineSize;
     }
 
     public FuelType getFuelType() {
-        throw new UnsupportedOperationException("TODO-03");
+        return fuelType;
     }
 
     public double getFuelCapacity() {
-        throw new UnsupportedOperationException("TODO-03");
+        return fuelCapacity;
     }
 
     public void setFuelCapacity(double fuelCapacity) {
-        throw new UnsupportedOperationException("TODO-03");
+        if (fuelCapacity <= 0.0) {
+            throw new IllegalArgumentException("fuelCapacity must be above 0.0: " + fuelCapacity);
+        }
+        this.fuelCapacity = fuelCapacity;
     }
 
     /* ------------------------------------------------------------------
