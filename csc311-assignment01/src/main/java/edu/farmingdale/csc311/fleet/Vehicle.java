@@ -9,6 +9,12 @@ package edu.farmingdale.csc311.fleet;
  * constructor. throw IllegalArgumentException when a rule is broken.
  * - used to help create the private static helper method validateTrim to validate make, model, and color
  * which was used in the vehicle constructor
+ * - used to help create the setters for year, color, wheels, and fuel capacity. it was also used to help
+ * connect the setters to the constructor to avoid checking the same values twice.
+ * - used to create the toString method by adding the parts that format the string
+ * -used to create the equals method by adding the parts that check if the object is the same,
+ * if it is an instance of vehicle, and if the vin matches
+ * - used to create the hashCode method by adding the part that returns the hashcode of the vin
  *
  * @author Carlos Gonzalez
  */
@@ -228,16 +234,27 @@ public abstract class Vehicle implements Honkable {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("TODO-05");
+        String engineString = fuelType.hasEngine() ? String.format("%.1fL", engineSize) : "n/a";
+        return String.format("%d %s %s [VIN=%s] color=%s, wheels=%d, engine=%s, fuel=%s, capacity=%.1f %s",
+                year, make, model, vin, color, wheels, engineString, fuelType.getLabel(), fuelCapacity, fuelType.getUnit());
     }
 
     @Override
     public boolean equals(Object other) {
-        throw new UnsupportedOperationException("TODO-05");
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Vehicle)) {
+            return false;
+        }
+        Vehicle that = (Vehicle) other;
+        return vin.equals(that.vin);
     }
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("TODO-05");
+        return vin.hashCode();
+    }
+
     }
 }
