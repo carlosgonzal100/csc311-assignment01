@@ -3,7 +3,7 @@ package edu.farmingdale.csc311.fleet;
 /**
  * The fuels a fleet vehicle can run on.
  *
- * @author Carlos Gonzalez
+ * @author YOUR NAME HERE
  */
 public enum FuelType {
 
@@ -22,38 +22,26 @@ public enum FuelType {
      * write the constructor, then finish the five methods below.
      * ------------------------------------------------------------------ */
 
-    GASOLINE("Gasoline", "gallons", 28.0, true),
-    DIESEL("Diesel", "gallons", 34.0, true),
-    ELECTRIC("Electric", "kWh", 3.2, false),
-    HYBRID("Hybrid", "gallons", 48.0, true);
-
-    private final String label;
-    private final String unit;
-    private final double milesPerUnit;
-    private final boolean hasEngine;
-
-    FuelType(String label, String unit, double milesPerUnit, boolean hasEngine) {
-        this.label = label;
-        this.unit = unit;
-        this.milesPerUnit = milesPerUnit;
-        this.hasEngine = hasEngine;
-    }
+    GASOLINE,
+    DIESEL,
+    ELECTRIC,
+    HYBRID;
 
     public String getLabel() {
-        return label;
+        throw new UnsupportedOperationException("TODO-01");
     }
 
     public String getUnit() {
-        return unit;
+        throw new UnsupportedOperationException("TODO-01");
     }
 
     public double getMilesPerUnit() {
-        return milesPerUnit;
+        throw new UnsupportedOperationException("TODO-01");
     }
 
     /** False for ELECTRIC, true for the rest. */
     public boolean hasEngine() {
-        return hasEngine;
+        throw new UnsupportedOperationException("TODO-01");
     }
 
     /**
@@ -61,15 +49,6 @@ public enum FuelType {
      * Throws IllegalArgumentException if the text matches nothing.
      */
     public static FuelType fromLabel(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("Label must not be null");
-        }
-        String t = text.trim();
-        for (FuelType ft : values()) {
-            if (ft.label.equalsIgnoreCase(t)) {
-                return ft;
-            }
-        }
-        throw new IllegalArgumentException("No FuelType for label: " + text);
+        throw new UnsupportedOperationException("TODO-01");
     }
 }
