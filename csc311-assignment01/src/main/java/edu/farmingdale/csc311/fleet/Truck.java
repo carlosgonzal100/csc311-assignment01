@@ -4,6 +4,8 @@ package edu.farmingdale.csc311.fleet;
  * A work truck. Its range drops as its payload rating goes up, so it
  * computes range differently from a Car.
  *
+ * Note: used git copilot to help create the toString method to help format the string
+ *
  * @author Carlos Gonzalez
  */
 public class Truck extends Vehicle {
