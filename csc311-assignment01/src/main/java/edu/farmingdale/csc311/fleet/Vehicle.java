@@ -4,7 +4,13 @@ package edu.farmingdale.csc311.fleet;
  * Base class for everything the motor pool owns. Abstract on purpose:
  * the fleet holds cars and trucks, never a plain "vehicle".
  *
- * @author YOUR NAME HERE
+ * Note: git copilot was used to:
+ * - help create the vehicle constructor by adding the parts that validate and stores the values passed into the
+ * constructor. throw IllegalArgumentException when a rule is broken.
+ * - used to help create the private static helper method validateTrim to validate make, model, and color
+ * which was used in the vehicle constructor
+ *
+ * @author Carlos Gonzalez
  */
 public abstract class Vehicle implements Honkable {
 
@@ -44,9 +50,91 @@ public abstract class Vehicle implements Honkable {
      * a private static helper and call it three times.
      * ------------------------------------------------------------------ */
 
+    private final String vin;
+    private final String make;
+    private final String model;
+    private final FuelType fuelType;
+    private final double engineSize;
+    private int year;
+    private String color;
+    private int wheels;
+    private double fuelCapacity;
+
+    //method checks and validates all values before storing them in the fields, throws IllegalArgumentException if any value is invalid
     protected Vehicle(String vin, String make, String model, int year, String color,
                       int wheels, double engineSize, FuelType fuelType, double fuelCapacity) {
-        throw new UnsupportedOperationException("TODO-02");
+        try {
+
+            //validating vin before storing it, if valid, store it in upper case
+            if (vin == null || vin.trim().length() != 17) {
+                throw new IllegalArgumentException("vin must be exactly 17 characters: " + vin);
+            } else {
+                this.vin = vin.trim().toUpperCase();
+            }
+
+            //validate and store make using the helper method validateTrim
+            this.make = validateTrim("make", make);
+
+            //validate and store model using the helper method validateTrim
+            this.model = validateTrim("model", model);
+
+            //validate and store color using the helper method validateTrim
+            this.color = validateTrim("color", color);
+
+            //validating year before storing it
+            if(year < 1900 || year > 2100) {
+                throw new IllegalArgumentException("year must be between 1900 and 2100: " + year);
+            } else {
+                this.year = year;
+            }
+
+            //validating wheels before storing it
+            if(wheels < 2 || wheels > 18) {
+                throw new IllegalArgumentException("wheels must be between 2 and 18: "+ wheels);
+            } else {
+                this.wheels = wheels;
+            }
+
+            //validating fuelType before storing it
+            if(fuelType == null) {
+                throw new IllegalArgumentException("fuelType cannot be null");
+            } else {
+                this.fuelType = fuelType;
+            }
+
+            //validating engineSize before storing it
+            if(fuelType.hasEngine()) {
+                if(engineSize <= 0.0 || engineSize > 8.5) {
+                    throw new IllegalArgumentException("engineSize must be above 0.0 and at most 8.5 when fuelType has an engine: " + engineSize);
+                } else {
+                    this.engineSize = engineSize;
+                }
+            } else {
+                if(engineSize != 0.0) {
+                    throw new IllegalArgumentException("engineSize must be exactly 0.0 when fuelType does not have an engine: " + engineSize);
+                } else {
+                    this.engineSize = engineSize;
+                }
+            }
+
+            //validating fuelCapacity before storing it
+            if(fuelCapacity <= 0.0) {
+                throw new IllegalArgumentException("fuelCapacity must be above 0.0: " + fuelCapacity);
+            } else {
+                this.fuelCapacity = fuelCapacity;
+            }
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+    }
+
+    //private static helper method to validate make, model, and color
+    private static String validateTrim(String fieldName, String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(fieldName + " cannot be null or blank: " + value);
+        }
+        return value.trim();
     }
 
     /* ------------------------------------------------------------------
