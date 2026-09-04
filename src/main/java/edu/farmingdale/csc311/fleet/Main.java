@@ -3,6 +3,22 @@ package edu.farmingdale.csc311.fleet;
 /**
  * Driver. This is the only class that prints a report.
  *
+ * Note: used git copilot to help write:
+ * - the buildFleet() method which adds the vehicles to the fleet
+ * - the printInventory() method which prints the inventory of vehicles
+ * - the printSoundCheck() method which prints the sound check of vehicles
+ * - the printImpatientAccord() method which prints the impatient accord
+ * - the printReport() method which prints the fleet report
+ * - the printGuardRails() method which prints the guard rails
+ * - finally, the main() method which calls all the other methods in order
+ *
+ * Note: i also used chatgpt to rewrite a few methods that git
+ * copilot wrote to better format the output, methods affected:
+ * - printImpatientAccord()
+ * - printReport()
+ * - printGuardRails()
+ * - main()
+ *
  * @author Carlos Gonzalez
  */
 public class Main {
