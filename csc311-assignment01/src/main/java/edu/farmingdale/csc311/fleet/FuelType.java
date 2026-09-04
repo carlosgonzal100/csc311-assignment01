@@ -62,7 +62,7 @@ public enum FuelType {
     public static FuelType fromLabel(String text) {
 
         if (text == null) {
-            throw new IllegalArgumentException("label cannot be null: " + text);
+            throw new IllegalArgumentException("label cannot be null: ");
         }
 
         for (FuelType fuelType : FuelType.values()) {
