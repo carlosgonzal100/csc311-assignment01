@@ -1,8 +1,6 @@
 package edu.farmingdale.csc311.fleet;
-
 /**
  * The fuels a fleet vehicle can run on.
- *
  * Note: Git copilot was used to help the from label method, the part
  * being the enhanced for loop and the if statement.
  *
@@ -62,6 +60,11 @@ public enum FuelType {
      * Throws IllegalArgumentException if the text matches nothing.
      */
     public static FuelType fromLabel(String text) {
+
+        if (text == null) {
+            throw new IllegalArgumentException("label cannot be null: " + text);
+        }
+
         for (FuelType fuelType : FuelType.values()) {
             if (fuelType.getLabel().equalsIgnoreCase(text.trim())) {
                 return fuelType;
