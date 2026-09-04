@@ -25,9 +25,9 @@ public enum FuelType {
      * write the constructor, then finish the five methods below.
      * ------------------------------------------------------------------ */
 
-    GASOLINE("Gasoline", "gallons", 28.0);
-    DIESEL("Diesel", "gallons", 34.0);
-    ELECTRIC("Electric", "kWh", 3.2);
+    GASOLINE("Gasoline", "gallons", 28.0),
+    DIESEL("Diesel", "gallons", 34.0),
+    ELECTRIC("Electric", "kWh", 3.2),
     HYBRID("Hybrid", "gallons", 48.0);
 
     private final String label;

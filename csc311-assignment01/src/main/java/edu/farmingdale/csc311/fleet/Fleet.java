@@ -4,6 +4,12 @@ package edu.farmingdale.csc311.fleet;
  * A named group of vehicles stored in a plain array.
  * No ArrayList, no HashMap. Arrays and loops only.
  *
+ * Note: used git copilot to:
+ * - help write the skeleton of the contains method, the add method, the findbyVin method,
+ * the removebyVin method, the toArray method, the sortedByYear method, the countWithFuelType method,
+ * the averageEngineSize method, and the longestRange method.
+ *
+ *
  * @author Carlos Gonzalez
  */
 public class Fleet {
@@ -180,25 +186,25 @@ public class Fleet {
     }
 
     public int countWithFuelType(FuelType fuel) {
-        int count = 0;
+        int total = 0;
         for (int i = 0; i < count; i++) {
             if (vehicles[i].getFuelType() == fuel) {
-                count++;
+                total++;
             }
         }
-        return count;
+        return total;
     }
 
     public double averageEngineSize() {
-        double total = 0;
-        int count = 0;
+        double total = 0.0;
+        int engineCount = 0;
         for (int i = 0; i < count; i++) {
-            if (vehicles[i].getFuelType().getEngineSize() > 0) {
-                total += vehicles[i].getFuelType().getEngineSize();
-                count++;
+            if (vehicles[i].getFuelType().hasEngine()) {
+                total += vehicles[i].getEngineSize();
+                engineCount++;
             }
         }
-        return count > 0 ? total / count : 0.0;
+        return engineCount > 0 ? total / engineCount : 0.0;
     }
 
     public Vehicle longestRange() {

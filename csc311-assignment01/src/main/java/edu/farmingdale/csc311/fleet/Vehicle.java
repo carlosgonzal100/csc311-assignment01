@@ -255,6 +255,4 @@ public abstract class Vehicle implements Honkable {
     public int hashCode() {
         return vin.hashCode();
     }
-
-    }
 }
